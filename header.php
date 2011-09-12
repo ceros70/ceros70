@@ -99,7 +99,7 @@
 					<?php }?>
 					</ul>
 					</li>
-					<li id="somos"><a href="http://cerosetenta.8manos.com/quienes-somos/" title="">&iquest;Quienes Somos?</a></li>
+					<li id="somos"><a href="/quienes-somos/" title="">&iquest;Quienes Somos?</a></li>
 					</ul>
 				</nav>
 				<!--</div>-->		

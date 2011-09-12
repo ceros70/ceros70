@@ -6,6 +6,27 @@
  * @subpackage Twenty_Eleven
  * @since Twenty Eleven 1.0
  */
+
+// has taxonomy
+function has_medio( $medio, $_post = null ) {
+	if ( !empty( $medio ) )
+		return false;
+
+	if ( $_post )
+		$_post = get_post( $_post );
+	else
+		$_post =& $GLOBALS['post'];
+
+	if ( !$_post )
+		return false;
+
+	$r = is_object_in_term( $_post->ID, 'medio', $medio );
+
+	if ( is_wp_error( $r ) )
+		return false;
+
+	return $r;
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -27,7 +48,7 @@
   <?php $attach = get_posts(array('post_type'=>'attachment','post_parent'=>get_the_ID(),'post__not_in'=>array(get_post_thumbnail_id(get_the_ID()))));?>
   <?php if(get_post_meta(get_the_id(),'video_url',true) != ""){?>
     <div class="video"><?php echo get_post_meta(get_the_id(),'video_url',true);?></div>
-  <?php }elseif(count($attach)>0){ ?>
+  <?php }elseif(count($attach)>0 && is_object_in_term( get_the_ID(), 'medio', 'galeria' )){ ?>
     <?php echo do_shortcode("[gpslideshow post_id=".$post->id." caption='on']");?>
   <?php }elseif (has_post_thumbnail()){?>
       <div class="fimage">
